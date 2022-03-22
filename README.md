@@ -19,7 +19,7 @@ New levels can easily be added by editing/exchanging level input file in res fol
 3. Run it: `./CppRacer`.
 
 ## Level input file
-Own level input files can be created as a simple csv file
+Own level input files can be created as a simple csv file. Each line in this file represents one column of walls on the racetrack.
 Syntax:
 distance // type // option1 // option2 // [1..n] (start // height)
  
