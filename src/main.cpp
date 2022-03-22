@@ -1,6 +1,26 @@
 #include <iostream>
+#include <string>
+#include "controller.h"
+#include "game.h"
+#include "renderer.h"
+
+
 
 int main() {
-    std::cout << "Hello World!" << "\n";
-    return 0;
+  constexpr std::size_t kFramesPerSecond{60};
+  constexpr std::size_t kMsPerFrame{1000 / kFramesPerSecond};
+  constexpr std::size_t kScreenWidth{1280};
+  constexpr std::size_t kScreenHeight{640};
+  constexpr std::size_t kGridWidth{128};
+  constexpr std::size_t kGridHeight{64};
+
+  Renderer renderer(kScreenWidth, kScreenHeight, kGridWidth, kGridHeight);
+  Controller controller;
+  Game game(kGridWidth, kGridHeight);
+  game.Run(controller, renderer, kMsPerFrame);
+  std::cout << "Game has terminated successfully!\n";
+  std::cout << "Score: " << game.GetScore() << "\n";
+  std::cout << "Time: " << game.GetTime() << " seconds\n";
+  
+  return 0;
 }
