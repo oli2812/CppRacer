@@ -15,13 +15,13 @@ void Game::Run(Controller const &controller, Renderer &renderer,
   Uint32 frame_end;
   Uint32 frame_duration;
   Uint32 start_time = title_timestamp;
-  
 
   int frame_count = 0;
   bool running = true;
 
   // intialize list of obstacles: load from file and store in deque
-  Obstacle::Init(obstacles);
+  Obstacle obstacle(0);
+  obstacle.Init(obstacles);
 
   while (running) {
     frame_start = SDL_GetTicks();
@@ -63,8 +63,8 @@ void Game::Run(Controller const &controller, Renderer &renderer,
 void Game::Update() {
   if (!car.alive) return;
 
+  // update car position and speed, then move obstacles
   car.Update();
-  
   Obstacle::Update(obstacles, car, score);
 
 }

@@ -3,11 +3,13 @@
 #include "SDL.h"
 #include "car.h"
 
+// interface towards car to update position and speed
 void Controller::MoveCar(Car &car, Car::Direction input) const {
   car.direction = input;
   return;
 }
 
+//Inputhandler for user inputs up,down, left, right
 void Controller::HandleInput(bool &running, Car &car) const {
   SDL_Event e;
   while (SDL_PollEvent(&e)) {

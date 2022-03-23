@@ -14,7 +14,6 @@ void Obstacle::Init(std::deque<Obstacle> &obstacles) {
   std::string pos;
   std::string height;
 
-  //TODO check ob distance benötigt
   Obstacle o(0);
   SDL_Rect r;
 
@@ -27,7 +26,7 @@ void Obstacle::Init(std::deque<Obstacle> &obstacles) {
       std::istringstream linestream(line);
       linestream >> distance >> type >> option1 >> option2 ;
       
-      o.distance = std::stoi(distance);
+      o.distance = std::stoi(distance) + 1;
       o.type = type;
       o.option1 = std::stoi(option1);
       o.option2 = std::stoi(option2);
@@ -70,7 +69,8 @@ void Obstacle::Update(std::deque<Obstacle> &obstacles, Car &car, int &score) {
         if (current_column != previous_column) {
           if (current_column == 0) {
             // remove obstacle as it has left the screen
-            obstacles.pop_front();
+            //obstacles.pop_front();
+            obstacles[i].visible = false;
             score++;
           }
           else {
@@ -82,8 +82,8 @@ void Obstacle::Update(std::deque<Obstacle> &obstacles, Car &car, int &score) {
               }
             }
           }
-          // check if last item of deque to avoid index out of bounds
-          if ((i+1) < obstacles.size()) {
+          // no out of bounds threat, last item in input file will always have distance -1
+          if (obstacles[i].distance > 0) {
             //current item holds distance in front of new obstacle
             //only to be checked if next item is not already visible
             if (!obstacles[i+1].visible) {
@@ -92,7 +92,9 @@ void Obstacle::Update(std::deque<Obstacle> &obstacles, Car &car, int &score) {
           }
         }
         // check if next obstacle needs to be added 
-        if (obstacles[i].distance == 0  && (i+1) < obstacles.size()) {
+        // no out of bounds threat, last item in input file will always have distance -1
+        if (obstacles[i].distance == 0) {
+          obstacles[i].distance -= 1;
           obstacles[i+1].visible = true;
         }
       }
