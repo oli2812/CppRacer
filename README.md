@@ -1,6 +1,6 @@
 # Capstone Project: CppRacer
 
-<img src="data/traffic_simulation.gif"/>
+<img src="res/screenshot.jpg"/>
 
 CppRacer is a sidescrolling racing simulation. The racing car must avoid all obstacles.
 It can be controlled using the arrow keys:
